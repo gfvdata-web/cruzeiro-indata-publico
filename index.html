@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cruzeiro InData</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Cruzeiro <span>InData</span></h1>
+  <p class="subtitle">Brasileirão Série A — fonte: football-data.org</p>
+</header>
+
+<main>
+
+  <section class="global-controls">
+    <label for="season-filter">Temporada</label>
+    <select id="season-filter"></select>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="partidas">Partidas</button>
+    <button class="tab-btn" data-tab="classificacao">Classificação</button>
+    <button class="tab-btn" data-tab="artilheiros">Artilheiros</button>
+  </nav>
+
+  <section id="tab-partidas" class="tab-panel active">
+    <section id="partidas-cards" class="cards-grid"></section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Calendário e resultados</h2>
+      </div>
+      <div class="table-wrap">
+        <table id="partidas-table">
+          <thead>
+            <tr>
+              <th data-sort="utc_date">Data</th>
+              <th data-sort="matchday">Rodada</th>
+              <th data-sort="home_team">Mandante</th>
+              <th>Placar</th>
+              <th data-sort="away_team">Visitante</th>
+              <th data-sort="status">Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <section id="tab-classificacao" class="tab-panel">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Classificação</h2>
+      </div>
+      <div class="table-wrap">
+        <table id="classificacao-table">
+          <thead>
+            <tr>
+              <th data-sort="position">Pos.</th>
+              <th data-sort="team">Time</th>
+              <th data-sort="played">J</th>
+              <th data-sort="won">V</th>
+              <th data-sort="draw">E</th>
+              <th data-sort="lost">D</th>
+              <th data-sort="goals_for">GP</th>
+              <th data-sort="goals_against">GC</th>
+              <th data-sort="goal_diff">SG</th>
+              <th data-sort="points">Pts</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <section id="tab-artilheiros" class="tab-panel">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Artilheiros</h2>
+        <input type="search" id="artilheiros-search" placeholder="Buscar jogador ou time...">
+      </div>
+      <div class="table-wrap">
+        <table id="artilheiros-table">
+          <thead>
+            <tr>
+              <th data-sort="player">Jogador</th>
+              <th data-sort="team">Time</th>
+              <th data-sort="goals">Gols</th>
+              <th data-sort="assists">Assist.</th>
+              <th data-sort="penalties">Pênaltis</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer>
+  <p>Football data provided by the Football-Data.org API · Projeto de aprendizado, sem fins comerciais</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

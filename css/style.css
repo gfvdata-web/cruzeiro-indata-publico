@@ -1,0 +1,280 @@
+:root {
+  --azul: #0033a0;
+  --azul-escuro: #001c5c;
+  --azul-claro: #4d7bd6;
+  --branco: #ffffff;
+  --fundo: #0a1128;
+  --fundo-painel: #101a3d;
+  --texto: #e8ecf7;
+  --texto-fraco: #9aa5c7;
+  --vitoria: #2fbf71;
+  --empate: #d9a52c;
+  --derrota: #e2453c;
+  --borda: #24305f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+.site-header {
+  background: linear-gradient(135deg, var(--azul-escuro), var(--azul));
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  border-bottom: 4px solid var(--branco);
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  letter-spacing: 0.03em;
+}
+
+.site-header h1 span {
+  color: var(--azul-claro);
+  font-weight: 300;
+}
+
+.subtitle {
+  margin: 0.4rem 0 0;
+  color: var(--texto-fraco);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.global-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+
+.global-controls label {
+  color: var(--texto-fraco);
+  font-size: 0.9rem;
+}
+
+.global-controls select {
+  background: var(--fundo-painel);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+.tag-league {
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--borda);
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--texto-fraco);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.7rem 1.1rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+  color: var(--branco);
+}
+
+.tab-btn.active {
+  color: var(--branco);
+  border-bottom-color: var(--azul-claro);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background: var(--fundo-painel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+}
+
+.card .value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--azul-claro);
+}
+
+.card .label {
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.panel {
+  background: var(--fundo-painel);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel h2 {
+  margin-top: 0;
+  border-bottom: 2px solid var(--azul);
+  padding-bottom: 0.6rem;
+}
+
+.panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.panel-head h2 {
+  flex: 1;
+  min-width: 200px;
+}
+
+.hint {
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+input[type="search"] {
+  background: var(--fundo);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.9rem;
+  min-width: 220px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th, td {
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  border-bottom: 1px solid var(--borda);
+  white-space: nowrap;
+}
+
+th {
+  color: var(--texto-fraco);
+  font-weight: 600;
+  user-select: none;
+}
+
+th[data-sort] {
+  cursor: pointer;
+}
+
+th[data-sort]:hover {
+  color: var(--branco);
+}
+
+th.sorted {
+  color: var(--branco);
+}
+
+tbody tr:hover {
+  background: rgba(77, 123, 214, 0.08);
+}
+
+#partidas-table tbody tr {
+  cursor: pointer;
+}
+
+#partidas-table tbody tr.selected {
+  background: rgba(77, 123, 214, 0.18);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.tag-v { background: rgba(47,191,113,0.15); color: var(--vitoria); }
+.tag-e { background: rgba(217,165,44,0.15); color: var(--empate); }
+.tag-d { background: rgba(226,69,60,0.15); color: var(--derrota); }
+
+.match-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.match-detail h3 {
+  font-size: 0.95rem;
+  color: var(--texto-fraco);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.empty-msg {
+  color: var(--texto-fraco);
+  font-style: italic;
+  padding: 0.8rem;
+}
+
+footer {
+  text-align: center;
+  color: var(--texto-fraco);
+  font-size: 0.8rem;
+  padding: 2rem 1rem;
+}
+
+@media (max-width: 720px) {
+  .match-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

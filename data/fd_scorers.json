@@ -1,0 +1,92 @@
+[
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Kevin Viveros",
+    "team": "CA Paranaense",
+    "goals": 11,
+    "assists": 1,
+    "penalties": 2
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Pedro",
+    "team": "CR Flamengo",
+    "goals": 10,
+    "assists": 4,
+    "penalties": null
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "John Kennedy",
+    "team": "Fluminense FC",
+    "goals": 9,
+    "assists": 1,
+    "penalties": null
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Carlos Vinícius",
+    "team": "Grêmio FBPA",
+    "goals": 9,
+    "assists": null,
+    "penalties": 1
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Breno Lopes",
+    "team": "Coritiba FBC",
+    "goals": 8,
+    "assists": 1,
+    "penalties": null
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Luciano Juba",
+    "team": "EC Bahia",
+    "goals": 7,
+    "assists": 1,
+    "penalties": 2
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Gabriel Barbosa",
+    "team": "Santos FC",
+    "goals": 7,
+    "assists": 2,
+    "penalties": 1
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Danilo dos Santos de Oliveira",
+    "team": "Botafogo FR",
+    "goals": 7,
+    "assists": 2,
+    "penalties": null
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "Arthur Cabral",
+    "team": "Botafogo FR",
+    "goals": 7,
+    "assists": 1,
+    "penalties": null
+  },
+  {
+    "season": 2026,
+    "competition": "Campeonato Brasileiro Série A",
+    "player": "José Manuel López",
+    "team": "SE Palmeiras",
+    "goals": 6,
+    "assists": 3,
+    "penalties": null
+  }
+]
