@@ -141,6 +141,42 @@ main {
   margin-top: 0.3rem;
 }
 
+.card.clickable {
+  cursor: pointer;
+  text-align: left;
+}
+
+.card.clickable:hover {
+  border-color: var(--azul-claro);
+}
+
+.card.clickable.selected {
+  border-color: var(--azul-claro);
+  background: rgba(77, 123, 214, 0.12);
+}
+
+.card.clickable .team-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--branco);
+  margin-bottom: 0.5rem;
+}
+
+.card.clickable .team-stats {
+  display: flex;
+  gap: 0.9rem;
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
+}
+
+.card.clickable .team-stats b {
+  color: var(--texto);
+}
+
+tr.team-highlight {
+  background: rgba(77, 123, 214, 0.16);
+}
+
 .panel {
   background: var(--fundo-painel);
   border: 1px solid var(--borda);
@@ -264,6 +300,10 @@ tbody tr:hover {
   color: var(--texto-fraco);
   font-style: italic;
   padding: 0.8rem;
+}
+
+.muted {
+  color: var(--texto-fraco);
 }
 
 footer {

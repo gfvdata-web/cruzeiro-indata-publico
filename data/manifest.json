@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-11T00:00:00+00:00",
+  "generated_at": "2026-07-12T19:02:40.781883+00:00",
   "files": [
     {
       "file": "fd_matches.json",
-      "description": "Calendário e resultados do Brasileirão Série A (football-data.org)",
+      "description": "Calendário e resultados do Brasileirão Série A (football-data.org), com placar do 1º tempo e árbitro",
       "row_count": 380
     },
     {
@@ -13,7 +13,7 @@
     },
     {
       "file": "fd_scorers.json",
-      "description": "Artilheiros do Brasileirão Série A (football-data.org)",
+      "description": "Artilheiros do Brasileirão Série A (football-data.org), com jogos, setor e cadastro do jogador",
       "row_count": 10
     }
   ]

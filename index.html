@@ -19,12 +19,15 @@
   <section class="global-controls">
     <label for="season-filter">Temporada</label>
     <select id="season-filter"></select>
+    <label for="team-filter">Time</label>
+    <select id="team-filter"></select>
   </section>
 
   <nav class="tabs">
     <button class="tab-btn active" data-tab="partidas">Partidas</button>
     <button class="tab-btn" data-tab="classificacao">Classificação</button>
     <button class="tab-btn" data-tab="artilheiros">Artilheiros</button>
+    <button class="tab-btn" data-tab="clubes">Clubes</button>
   </nav>
 
   <section id="tab-partidas" class="tab-panel active">
@@ -42,8 +45,10 @@
               <th data-sort="matchday">Rodada</th>
               <th data-sort="home_team">Mandante</th>
               <th>Placar</th>
+              <th>1º T</th>
               <th data-sort="away_team">Visitante</th>
               <th data-sort="status">Status</th>
+              <th data-sort="referee">Árbitro</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -91,7 +96,12 @@
             <tr>
               <th data-sort="player">Jogador</th>
               <th data-sort="team">Time</th>
+              <th data-sort="nationality">Nac.</th>
+              <th data-sort="section">Setor</th>
+              <th data-sort="age">Idade</th>
+              <th data-sort="played_matches">Jogos</th>
               <th data-sort="goals">Gols</th>
+              <th data-sort="gpg">Gols/Jogo</th>
               <th data-sort="assists">Assist.</th>
               <th data-sort="penalties">Pênaltis</th>
             </tr>
@@ -99,6 +109,16 @@
           <tbody></tbody>
         </table>
       </div>
+    </section>
+  </section>
+
+  <section id="tab-clubes" class="tab-panel">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Clubes</h2>
+        <p class="hint">Clique em um clube para filtrar Partidas, Classificação e Artilheiros por ele.</p>
+      </div>
+      <section id="clubes-cards" class="cards-grid"></section>
     </section>
   </section>
 

@@ -6,7 +6,11 @@
     "team": "CA Paranaense",
     "goals": 11,
     "assists": 1,
-    "penalties": 2
+    "penalties": 2,
+    "played_matches": 17,
+    "nationality": "Colombia",
+    "date_of_birth": "2000-04-26",
+    "section": "Offence"
   },
   {
     "season": 2026,
@@ -15,7 +19,11 @@
     "team": "CR Flamengo",
     "goals": 10,
     "assists": 4,
-    "penalties": null
+    "penalties": null,
+    "played_matches": 17,
+    "nationality": "Brazil",
+    "date_of_birth": "1997-06-20",
+    "section": "Offence"
   },
   {
     "season": 2026,
@@ -24,7 +32,11 @@
     "team": "Fluminense FC",
     "goals": 9,
     "assists": 1,
-    "penalties": null
+    "penalties": null,
+    "played_matches": 18,
+    "nationality": "Brazil",
+    "date_of_birth": "2002-05-18",
+    "section": "Centre-Forward"
   },
   {
     "season": 2026,
@@ -33,7 +45,11 @@
     "team": "Grêmio FBPA",
     "goals": 9,
     "assists": null,
-    "penalties": 1
+    "penalties": 1,
+    "played_matches": 17,
+    "nationality": "Brazil",
+    "date_of_birth": "1995-03-25",
+    "section": "Centre-Forward"
   },
   {
     "season": 2026,
@@ -42,7 +58,11 @@
     "team": "Coritiba FBC",
     "goals": 8,
     "assists": 1,
-    "penalties": null
+    "penalties": null,
+    "played_matches": 15,
+    "nationality": "Brazil",
+    "date_of_birth": "1996-01-24",
+    "section": "Offence"
   },
   {
     "season": 2026,
@@ -51,7 +71,11 @@
     "team": "EC Bahia",
     "goals": 7,
     "assists": 1,
-    "penalties": 2
+    "penalties": 2,
+    "played_matches": 15,
+    "nationality": "Brazil",
+    "date_of_birth": "1999-08-29",
+    "section": "Defence"
   },
   {
     "season": 2026,
@@ -60,7 +84,11 @@
     "team": "Santos FC",
     "goals": 7,
     "assists": 2,
-    "penalties": 1
+    "penalties": 1,
+    "played_matches": 13,
+    "nationality": "Brazil",
+    "date_of_birth": "1996-08-30",
+    "section": "Offence"
   },
   {
     "season": 2026,
@@ -69,7 +97,11 @@
     "team": "Botafogo FR",
     "goals": 7,
     "assists": 2,
-    "penalties": null
+    "penalties": null,
+    "played_matches": 12,
+    "nationality": "Brazil",
+    "date_of_birth": "2001-04-29",
+    "section": "Midfield"
   },
   {
     "season": 2026,
@@ -78,7 +110,11 @@
     "team": "Botafogo FR",
     "goals": 7,
     "assists": 1,
-    "penalties": null
+    "penalties": null,
+    "played_matches": 17,
+    "nationality": "Brazil",
+    "date_of_birth": "1998-04-25",
+    "section": "Centre-Forward"
   },
   {
     "season": 2026,
@@ -87,6 +123,10 @@
     "team": "SE Palmeiras",
     "goals": 6,
     "assists": 3,
-    "penalties": null
+    "penalties": null,
+    "played_matches": 17,
+    "nationality": "Argentina",
+    "date_of_birth": "2000-12-06",
+    "section": "Offence"
   }
 ]

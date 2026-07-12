@@ -27,6 +27,27 @@ const STATUS_LABELS = {
   CANCELLED: "Cancelada",
 };
 
+// Setor do jogador (campo "section" da football-data.org) traduzido.
+const SECTION_LABELS = {
+  Offence: "Ataque",
+  "Centre-Forward": "Centroavante",
+  Midfield: "Meio",
+  Defence: "Defesa",
+  Goalkeeper: "Goleiro",
+};
+
+// Idade em anos a partir de data ISO de nascimento (AAAA-MM-DD).
+function ageFromDate(iso) {
+  if (!iso) return null;
+  const b = new Date(iso);
+  if (isNaN(b)) return null;
+  const now = new Date();
+  let age = now.getFullYear() - b.getFullYear();
+  const m = now.getMonth() - b.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < b.getDate())) age--;
+  return age;
+}
+
 // ---------------------------------------------------------------------------
 // Tabela genérica: ordenável por clique no cabeçalho.
 // ---------------------------------------------------------------------------
@@ -84,10 +105,29 @@ function buildCards(container, cards) {
 // ---------------------------------------------------------------------------
 const state = {
   season: null,
+  team: null, // null = "Todos os times"
   matches: [],
   standings: [],
   scorers: [],
 };
+
+const TEAM_FOCO = "Cruzeiro EC"; // foco do projeto: pré-seleciona o Cruzeiro quando disponível na temporada
+
+function teamsInSeason(season) {
+  const teams = new Set();
+  state.matches.filter(m => m.season === season).forEach(m => {
+    teams.add(m.home_team);
+    teams.add(m.away_team);
+  });
+  return [...teams].sort((a, b) => a.localeCompare(b));
+}
+
+function renderAll() {
+  renderPartidas();
+  renderClassificacao();
+  renderArtilheiros();
+  renderClubes();
+}
 
 function setupSeasonFilter() {
   const seasons = [...new Set(state.matches.map(m => m.season))].sort((a, b) => b - a);
@@ -98,10 +138,32 @@ function setupSeasonFilter() {
 
   select.addEventListener("change", () => {
     state.season = Number(select.value);
-    renderPartidas();
-    renderClassificacao();
-    renderArtilheiros();
+    setupTeamFilter();
+    renderAll();
   });
+}
+
+function setupTeamFilter() {
+  const teams = teamsInSeason(state.season);
+  const select = document.getElementById("team-filter");
+  select.innerHTML = `<option value="">Todos os times</option>` +
+    teams.map(t => `<option value="${t}">${t}</option>`).join("");
+
+  state.team = teams.includes(state.team) ? state.team
+    : teams.includes(TEAM_FOCO) ? TEAM_FOCO
+    : null;
+  select.value = state.team ?? "";
+
+  select.onchange = () => {
+    state.team = select.value || null;
+    renderAll();
+  };
+}
+
+function setTeamFilter(team) {
+  state.team = team;
+  document.getElementById("team-filter").value = team ?? "";
+  renderAll();
 }
 
 function setupTabs() {
@@ -121,7 +183,10 @@ function setupTabs() {
 let partidasTable = null;
 
 function renderPartidas() {
-  const rows = state.matches.filter(m => m.season === state.season);
+  const rows = state.matches.filter(m =>
+    m.season === state.season &&
+    (!state.team || m.home_team === state.team || m.away_team === state.team)
+  );
 
   const finished = rows.filter(m => m.status === "FINISHED");
   const scheduled = rows.filter(m => m.status === "SCHEDULED" || m.status === "TIMED");
@@ -135,14 +200,21 @@ function renderPartidas() {
   const rowHtml = m => {
     const score = (m.home_score === null || m.home_score === undefined)
       ? "—" : `${m.home_score} x ${m.away_score}`;
+    const half = (m.half_home === null || m.half_home === undefined)
+      ? "—" : `${m.half_home} x ${m.half_away}`;
+    const ref = m.referee
+      ? `${m.referee}${m.referee_country ? ` <span class="muted">(${m.referee_country})</span>` : ""}`
+      : "—";
     return `
       <tr>
         <td>${fmtDate(m.utc_date)}</td>
         <td>${m.matchday ?? "—"}</td>
         <td>${m.home_team}</td>
         <td><span class="tag">${score}</span></td>
+        <td class="muted">${half}</td>
         <td>${m.away_team}</td>
         <td>${STATUS_LABELS[m.status] ?? m.status}</td>
+        <td>${ref}</td>
       </tr>
     `;
   };
@@ -165,7 +237,7 @@ function renderClassificacao() {
   const rows = state.standings.filter(s => s.season === state.season);
 
   const rowHtml = s => `
-    <tr>
+    <tr class="${state.team && s.team === state.team ? "team-highlight" : ""}">
       <td>${s.position}</td>
       <td>${s.team}</td>
       <td>${fmt(s.played)}</td>
@@ -197,6 +269,7 @@ let artilheirosSearch = "";
 function renderArtilheiros() {
   const rows = state.scorers.filter(s =>
     s.season === state.season &&
+    (!state.team || s.team === state.team) &&
     (s.player.toLowerCase().includes(artilheirosSearch) || s.team.toLowerCase().includes(artilheirosSearch))
   );
 
@@ -204,7 +277,12 @@ function renderArtilheiros() {
     <tr>
       <td>${s.player}</td>
       <td>${s.team}</td>
+      <td>${s.nationality ?? "—"}</td>
+      <td>${SECTION_LABELS[s.section] ?? s.section ?? "—"}</td>
+      <td>${fmt(s.age)}</td>
+      <td>${fmt(s.played_matches)}</td>
       <td>${fmt(s.goals)}</td>
+      <td>${s.gpg === null ? "—" : fmt(s.gpg, 2)}</td>
       <td>${fmt(s.assists)}</td>
       <td>${fmt(s.penalties)}</td>
     </tr>
@@ -220,6 +298,51 @@ function renderArtilheiros() {
 }
 
 // ---------------------------------------------------------------------------
+// Aba Clubes: um card por clube da temporada, com resumo tirado da
+// classificação + artilheiros. Clicar no card aplica o filtro de time global.
+// ---------------------------------------------------------------------------
+function renderClubes() {
+  const standingsBySeason = state.standings.filter(s => s.season === state.season);
+  const teams = teamsInSeason(state.season);
+
+  const cardHtml = team => {
+    const standing = standingsBySeason.find(s => s.team === team);
+    const topScorer = state.scorers
+      .filter(s => s.season === state.season && s.team === team)
+      .sort((a, b) => (b.goals ?? 0) - (a.goals ?? 0))[0];
+    const selected = state.team === team;
+
+    return `
+      <div class="card clickable${selected ? " selected" : ""}" data-team="${team}">
+        <div class="team-name">${team}</div>
+        <div class="team-stats">
+          <span>Pos. <b>${standing ? standing.position : "—"}</b></span>
+          <span>Pts <b>${standing ? fmt(standing.points) : "—"}</b></span>
+          <span>SG <b>${standing ? fmt(standing.goal_diff) : "—"}</b></span>
+        </div>
+        <div class="team-stats" style="margin-top:0.4rem">
+          <span>Artilheiro <b>${topScorer ? `${topScorer.player} (${topScorer.goals})` : "—"}</b></span>
+        </div>
+      </div>
+    `;
+  };
+
+  const container = document.getElementById("clubes-cards");
+  if (teams.length === 0) {
+    container.innerHTML = `<p class="empty-msg">Sem dados para os filtros atuais.</p>`;
+    return;
+  }
+  container.innerHTML = teams.map(cardHtml).join("");
+
+  container.querySelectorAll(".card.clickable").forEach(card => {
+    card.addEventListener("click", () => {
+      const team = card.dataset.team;
+      setTeamFilter(state.team === team ? null : team);
+    });
+  });
+}
+
+// ---------------------------------------------------------------------------
 async function main() {
   [state.matches, state.standings, state.scorers] = await Promise.all([
     loadJSON("data/fd_matches.json"),
@@ -227,11 +350,16 @@ async function main() {
     loadJSON("data/fd_scorers.json"),
   ]);
 
+  // Campos derivados dos artilheiros (para ordenar/exibir): gols por jogo e idade.
+  state.scorers.forEach(s => {
+    s.gpg = s.played_matches ? s.goals / s.played_matches : null;
+    s.age = ageFromDate(s.date_of_birth);
+  });
+
   setupTabs();
   setupSeasonFilter();
-  renderPartidas();
-  renderClassificacao();
-  renderArtilheiros();
+  setupTeamFilter();
+  renderAll();
 
   document.getElementById("artilheiros-search").addEventListener("input", e => {
     artilheirosSearch = e.target.value.trim().toLowerCase();
